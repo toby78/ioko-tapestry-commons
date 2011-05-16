@@ -20,31 +20,54 @@
 <head></head>
 <body>
 <h1>Swf Object Test Page</h1>
+
 <h2>Basic Swf</h2>
-<div t:id="swfObject" t:type="ioko/swfObject" width="300" height="300" swf="literal:/assets/app/1.0/pages/SwfObjectTest.swf"
+
+<div t:id="swfObject" t:type="ioko/swfObject" width="300" height="300" swf="asset:SwfObjectTest.swf"
      flashvars="flashVars">
     <p>Non Flash Content</p>
 </div>
 <h2>Asset loaded swf</h2>
+
 <div t:id="swfObject2" t:type="ioko/swfObject" width="300" height="300" swf="asset:SwfObjectTest.swf"
      flashvars="flashVars">
     <p>Non Flash Content</p>
 </div>
 
 <h2>Asset with width and Height as percentages</h2>
-<div t:id="swfObject3" t:type="ioko/swfObject" width="100%" height="100%" swf="literal:/assets/app/1.0/pages/SwfObjectTest.swf"
+
+<div t:id="swfObject3" t:type="ioko/swfObject" width="100%" height="100%" swf="asset:SwfObjectTest.swf"
      attributes="flashvars" params="flashvars" useExpressInstall="false">
     <p>Non Flash Content</p>
 </div>
 
 <h2>What does flash think has happend</h2>
+
 <div id="flashvarResults">
 </div>
 
 <h2>Final Variant to catch other cases</h2>
-<div t:id="swfObjectVariant" t:type="ioko/swfObject" width="300" height="300" swf="literal:/assets/app/1.0/pages/SwfObjectTest.swf"
+
+<div t:id="swfObjectVariant" t:type="ioko/swfObject" width="300" height="300" swf="asset:SwfObjectTest.swf"
      attributes="flashvars" params="flashvars" useExpressInstall="false">
     <p>Non Flash Content</p>
 </div>
+
+<h2>Manual SWF Object Embed</h2>
+
+<div id="manual"></div>
+<script type="text/javascript">
+
+    var flashvars = {
+        bob: "The builder",
+        jack: "Sprat"
+    };
+    var params = {};
+    var attributes = {};
+    swfobject.embedSWF("/assets/1.0/ioko/pages/SwfObjectTest.swf",
+            "manual", 300, 300, "10.0.22", "/assets/1.0/ioko/components/expressInstall.swf", flashvars, params, attributes);
+
+</script>
+
 </body>
 </html>

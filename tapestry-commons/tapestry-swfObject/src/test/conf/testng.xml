@@ -27,6 +27,7 @@
 
     </test>
     <test name="integration">
+        <parameter name="webAppFolder" value="src/test/webapp"/>
         <packages>
             <package name="uk.co.ioko.tapestry.swfObject.integration"/>
         </packages>

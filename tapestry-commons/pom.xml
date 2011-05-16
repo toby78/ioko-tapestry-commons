@@ -70,10 +70,8 @@
     </contributors>
 
     <scm>
-        <connection>scm:svn:https://ioko-tapestry-commons.googlecode.com/svn/trunk/ioko-tapestry-commons</connection>
-        <url>http://code.google.com/p/ioko-tapestry-commons/source/browse/#svn/trunk/tapestry-commons</url>
-        <developerConnection>scm:svn:https://ioko-tapestry-commons.googlecode.com/svn/trunk/ioko-tapestry-commons
-        </developerConnection>
+        <connection>scm:git:git@github.com:ioko-tapestry-commons/ioko-tapestry-commons.git</connection>
+        <url>https://github.com/ioko-tapestry-commons/ioko-tapestry-commons</url>
     </scm>
 
     <build>
@@ -352,7 +350,7 @@ oummmmmUUWW9WflhljqXmbpqovjZljjlkpUUnm]]></license>
     </dependencies>
 
     <properties>
-        <tapestry-release-version>5.1.0.3</tapestry-release-version>
+        <tapestry-release-version>5.2.5</tapestry-release-version>
         <jetty-release-version>6.1H.14</jetty-release-version>
         <clover.version>2.5.1</clover.version>
     </properties>

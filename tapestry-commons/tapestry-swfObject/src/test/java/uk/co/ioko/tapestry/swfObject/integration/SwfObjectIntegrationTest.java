@@ -20,42 +20,40 @@
 package uk.co.ioko.tapestry.swfObject.integration;
 
 import org.apache.tapestry5.test.AbstractIntegrationTestSuite;
+import org.apache.tapestry5.test.SeleniumTestCase;
 import org.testng.annotations.Test;
 
 /**
  * Created by IntelliJ IDEA. User: ben Date: Jun 11, 2009 Time: 2:17:01 PM
  */
-public class SwfObjectIntegrationTest extends AbstractIntegrationTestSuite {
-	public SwfObjectIntegrationTest() {
-		super("src/test/webapp");
-	}
+public class SwfObjectIntegrationTest extends SeleniumTestCase {
 
-	@Test(groups = {"flashRequired", "selenium"})
-	public void testFlashLoader() throws Exception {
-		open(BASE_URL + "SwfObjectTestPage");
+    @Test(groups = {"flashRequired", "selenium"})
+    public void testFlashLoader() throws Exception {
 
-		// We need to wait for flash to load and the page javascript to get the flash params from it
-		waitForCondition("var contents = selenium.getText(\"//div[@id='flashvarResults']\"); contents != \"\";", "5000");
+        open(getBaseURL() + "SwfObjectTestPage");
 
-		assertText("//div[@id='flashvarResults']/dl/dt[1]", "Cat");
-		assertText("//div[@id='flashvarResults']/dl/dd[1]", "Parsnip");
-		assertText("//div[@id='flashvarResults']/dl/dt[2]", "Vegetable");
-		assertText("//div[@id='flashvarResults']/dl/dd[2]", "Turnip");
+        // We need to wait for flash to load and the page javascript to get the flash params from it
+        waitForCondition("var contents = selenium.getText(\"//div[@id='flashvarResults']\"); contents != \"\";", "5000");
+
+        assertText("//div[@id='flashvarResults']/dl/dt[1]", "Cat");
+        assertText("//div[@id='flashvarResults']/dl/dd[1]", "Parsnip");
+        assertText("//div[@id='flashvarResults']/dl/dt[2]", "Vegetable");
+        assertText("//div[@id='flashvarResults']/dl/dd[2]", "Turnip");
 
 
-	}
+    }
 
-	@Test(groups = {"flashRequired", "selenium"})
-	public void testAjax() throws Exception {
-		open(BASE_URL + "SwfObjectAjaxPage");
+    @Test(groups = {"flashRequired", "selenium"})
+    public void testAjax() throws Exception {
+        open(getBaseURL() + "SwfObjectAjaxPage");
 
-		// We need to wait for flash to load and the page javascript to get the flash params from it
-		waitForCondition("var contents = selenium.getText(\"//p[@id='ajaxResponse']\"); contents != \"\";", "5000");
+        // We need to wait for flash to load and the page javascript to get the flash params from it
+        waitForCondition("var contents = selenium.getText(\"//p[@id='ajaxResponse']\"); contents != \"\";", "5000");
 
-		assertText("//p[@id='ajaxResponse']", "Parsnip");
+        assertText("//p[@id='ajaxResponse']", "Parsnip");
 
 
-
-	}
+    }
 
 }

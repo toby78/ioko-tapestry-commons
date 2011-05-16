@@ -17,12 +17,12 @@
  *     along with ioko tapestry-commons.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-Tapestry.Initializer.readFlashStatus = function (flashId, outputId) {
+Tapestry.Initializer.readFlashStatus = function(spec) {
 
     new PeriodicalExecuter(function(pe) {
-        if ($(flashId).getFlashVars) {
+        if ($(spec.flashId).getFlashVars) {
             pe.stop();
-            updateFlashVars(flashId, outputId);
+            updateFlashVars(spec.flashId, spec.outputId);
         }
     }, 1);
 
