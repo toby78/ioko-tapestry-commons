@@ -15,13 +15,20 @@ public class ClientBehaviorSupportRecorder extends SupportRecorder implements Cl
 		this.clientBehaviorSupport = clientBehaviorSupport;
 	}
 
-	public void addFormFragment(String clientId, String showFunctionName, String hideFunctionName) {
+	@SuppressWarnings({"deprecation"})
+    public void addFormFragment(String clientId, String showFunctionName, String hideFunctionName) {
 		Method method = getMethod("addFormFragment", String.class, String.class, String.class);
 		recordMethodCall(method, new Object[] { clientId, showFunctionName, hideFunctionName });
 		clientBehaviorSupport.addFormFragment(clientId, showFunctionName, hideFunctionName);
 	}
 
-	public void addFormInjector(String clientId, Link link, InsertPosition insertPosition, String showFunctionName) {
+    public void addFormFragment(String clientId, boolean alwaysSubmit, String showFunctionName, String hideFunctionName) {
+        Method method = getMethod("addFormFragment", String.class, boolean.class, String.class, String.class);
+        recordMethodCall(method, new Object[] {clientId, alwaysSubmit, showFunctionName, hideFunctionName});
+        clientBehaviorSupport.addFormFragment(clientId, alwaysSubmit, showFunctionName, hideFunctionName);
+    }
+
+    public void addFormInjector(String clientId, Link link, InsertPosition insertPosition, String showFunctionName) {
 		Method method = getMethod("addFormInjector", String.class, Link.class, InsertPosition.class, String.class);
 		recordMethodCall(method, new Object[] { clientId, link, insertPosition, showFunctionName });
 		clientBehaviorSupport.addFormInjector(clientId, link, insertPosition, showFunctionName);

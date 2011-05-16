@@ -1,6 +1,7 @@
 <!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd" >
 <suite name="All">
 	<test name="All Tests">
+        <parameter name="tapestry.web-app-folder" value="src/test/webapp"/>
 		<packages>
 			<package name="uk.co.ioko.*"/>
 		</packages>

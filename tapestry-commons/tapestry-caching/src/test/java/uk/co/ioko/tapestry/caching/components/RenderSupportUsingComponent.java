@@ -37,6 +37,7 @@ import java.util.Date;
  *
  * Created by IntelliJ IDEA. User: ben Date: Jun 23, 2009 Time: 3:19:53 PM
  */
+@SuppressWarnings({"ALL"})
 @IncludeJavaScriptLibrary("RenderSupport.js")
 @IncludeStylesheet("RenderSupport.css")
 public class RenderSupportUsingComponent {

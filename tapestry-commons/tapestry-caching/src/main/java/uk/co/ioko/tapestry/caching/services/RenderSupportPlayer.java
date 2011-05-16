@@ -27,9 +27,11 @@ import uk.co.ioko.tapestry.caching.services.support.MethodCall;
 
 public class RenderSupportPlayer extends SupportPlayer {
 
-	private RenderSupport renderSupport;
+	@SuppressWarnings({"deprecation"})
+    private RenderSupport renderSupport;
 
-	public RenderSupportPlayer(RenderSupport renderSupport) {
+	@SuppressWarnings({"deprecation"})
+    public RenderSupportPlayer(RenderSupport renderSupport) {
 		this.renderSupport = renderSupport;
 	}
 

@@ -19,17 +19,16 @@
 
 package uk.co.ioko.tapestry.caching.services;
 
-import java.lang.reflect.Method;
-import java.util.ArrayList;
-import java.util.List;
-
 import org.apache.tapestry5.Asset;
 import org.apache.tapestry5.ComponentResources;
 import org.apache.tapestry5.FieldFocusPriority;
 import org.apache.tapestry5.RenderSupport;
-import org.apache.tapestry5.ioc.internal.util.Defense;
 import org.apache.tapestry5.json.JSONArray;
 import org.apache.tapestry5.json.JSONObject;
+
+import java.lang.reflect.Method;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Proxy class for RenderSupport that records all methods called on it. This is so we can 'playback' method calls for
@@ -39,7 +38,8 @@ import org.apache.tapestry5.json.JSONObject;
  */
 public class RenderSupportRecorder extends SupportRecorder implements RenderSupport {
 
-	private RenderSupport renderSupport;
+	@SuppressWarnings({"deprecation"})
+    private RenderSupport renderSupport;
 
 	public RenderSupportRecorder(RenderSupport renderSupport) {
 		this.renderSupport = renderSupport;
@@ -47,59 +47,65 @@ public class RenderSupportRecorder extends SupportRecorder implements RenderSupp
 
 	// == IMPLEMENT ALL METHODS IN RENDER SUPPORT ==
 
-	public void addClasspathScriptLink(String... classpaths) {
+	@SuppressWarnings({"deprecation"})
+    public void addClasspathScriptLink(String... classpaths) {
 		Method method = getMethod("addClasspathScriptLink", String[].class);
 		recordMethodCall(method, new Object[] { classpaths });
 		renderSupport.addClasspathScriptLink(classpaths);
 	}
 
+    @SuppressWarnings({"deprecation"})
 	public void addInit(String functionName, JSONArray parameterList) {
 		Method method = getMethod("addInit", String.class, JSONArray.class);
 		recordMethodCall(method, functionName, parameterList);
 		renderSupport.addInit(functionName, parameterList);
 	}
 
+    @SuppressWarnings({"deprecation"})
 	public void addInit(String functionName, JSONObject parameter) {
 		Method method = getMethod("addInit", String.class, JSONObject.class);
 		recordMethodCall(method, functionName, parameter);
 		renderSupport.addInit(functionName, parameter);
 	}
 
+    @SuppressWarnings({"deprecation"})
 	public void addInit(String functionName, String... parameters) {
 		Method method = getMethod("addInit", String.class, String[].class);
 		recordMethodCall(method, functionName, parameters);
 		renderSupport.addInit(functionName, parameters);
 	}
 
+    @SuppressWarnings({"deprecation"})
 	public void addScript(String format, Object... arguments) {
 		Method method = getMethod("addScript", String.class, Object[].class);
 		recordMethodCall(method, format, arguments);
 		renderSupport.addScript(format, arguments);
 	}
 
+    @SuppressWarnings({"deprecation"})
 	public void addScript(String script) {
 		Method method = getMethod("addScript", String.class);
 		recordMethodCall(method, script);
 		renderSupport.addScript(script);
 	}
 
+    @SuppressWarnings({"deprecation"})
 	public void addScriptLink(Asset... scriptAssets) {
 		List<String> assets = new ArrayList<String>();
 		for (Asset asset : scriptAssets) {
-			Defense.notNull(asset, "scriptAsset");
 			assets.add(asset.toClientURL());
 		}
 		addScriptLink(assets.toArray(new String[assets.size()]));
 	}
 
-	public void addScriptLink(String... scriptURLs) {
+    @SuppressWarnings({"deprecation"})
+    public void addScriptLink(String... scriptURLs) {
 		Method method = getMethod("addScriptLink", String[].class);
 		recordMethodCall(method, new Object[] { scriptURLs });
 		renderSupport.addScriptLink(scriptURLs);
 	}
 
 	public void addStylesheetLink(Asset stylesheet, String media) {
-		Defense.notNull(stylesheet, "stylesheet");
 		addStylesheetLink(stylesheet.toClientURL(), media);
 	}
 
@@ -109,10 +115,12 @@ public class RenderSupportRecorder extends SupportRecorder implements RenderSupp
 		renderSupport.addStylesheetLink(stylesheetURL, media);
 	}
 
+    @SuppressWarnings({"deprecation"})
 	public String allocateClientId(ComponentResources resources) {
 		return allocateClientId(resources.getId());
 	}
 
+    @SuppressWarnings({"deprecation"})
 	public String allocateClientId(String id) {
 		Method method = getMethod("allocateClientId", String.class);
 		recordMethodCall(method, id);
@@ -127,6 +135,7 @@ public class RenderSupportRecorder extends SupportRecorder implements RenderSupp
 
 	// =============================================
 
+    @SuppressWarnings({"deprecation"})
 	private Method getMethod(String name, Class<?>... parameterTypes) {
 		return super.getMethod(RenderSupport.class, name, parameterTypes);
 	}

@@ -72,7 +72,8 @@ public class Cache {
 
 	// ==== STUFF REQUIRED FOR JS/CSS CACHING ====
 
-	@Environmental
+	@SuppressWarnings({"deprecation"})
+    @Environmental
 	private RenderSupport renderSupport;
 
 	@Environmental
@@ -112,7 +113,8 @@ public class Cache {
 		return false;
 	}
 
-	@BeginRender
+	@SuppressWarnings({"deprecation"})
+    @BeginRender
 	void beginRender(MarkupWriter markupWriter) {
 		currentElement = markupWriter.element(element);
 		componentResources.renderInformalParameters(markupWriter);
@@ -126,7 +128,8 @@ public class Cache {
 		environment.push(ClientBehaviorSupport.class, cbsRecorder);
 	}
 
-	@AfterRender
+	@SuppressWarnings({"deprecation"})
+    @AfterRender
 	void afterRender(MarkupWriter markupWriter) {
 		// end markup
 		markupWriter.end();

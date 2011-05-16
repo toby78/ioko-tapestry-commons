@@ -19,23 +19,20 @@
 
 package uk.co.ioko.tapestry.cacheControl.integration;
 
-import org.apache.tapestry5.test.AbstractIntegrationTestSuite;
+import org.apache.tapestry5.test.SeleniumTestCase;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 
 /**
  * Created by IntelliJ IDEA. User: ben Date: Jun 16, 2009 Time: 9:31:22 AM
  */
-public class CacheControlIntegrationTest extends AbstractIntegrationTestSuite {
-	public CacheControlIntegrationTest() {
-		super("src/test/webapp");
-	}
+public class CacheControlIntegrationTest extends SeleniumTestCase {
 
 	@Test(groups = {"selenium"})
 	public void testShortCachedPage() throws Exception {
 
 		// Get the contents of the date time field
-		open(BASE_URL + "CacheControlShortTestPage");
+		open(getBaseURL() + "CacheControlShortTestPage");
 		String initialDate = getText("//dl[@id='shortlive']/dt[2]");
 
 	}
@@ -43,7 +40,7 @@ public class CacheControlIntegrationTest extends AbstractIntegrationTestSuite {
 	@Test(groups = {"selenium"})
 	public void testMediumCachedPage() throws Exception {
 		// Get the contents of the date time field
-		open(BASE_URL + "CacheControlMediumTestPage");
+		open(getBaseURL() + "CacheControlMediumTestPage");
 		String initialDate = getText("//dl[@id='mediumlive']/dt[2]");
 
 		// Wait 3 seconds
@@ -51,7 +48,7 @@ public class CacheControlIntegrationTest extends AbstractIntegrationTestSuite {
 
 		// Get the contents of the date time field - this should be cached
 //		clickAndWait("link=Refresh");
-		open(BASE_URL + "CacheControlMediumTestPage");
+		open(getBaseURL() + "CacheControlMediumTestPage");
 		String interimDate = getText("//dl[@id='mediumlive']/dt[2]");
 
 		// Wait 3 seconds - medium cache is 5 seconds
@@ -59,7 +56,7 @@ public class CacheControlIntegrationTest extends AbstractIntegrationTestSuite {
 
 		// Get the contents of the date time field - this should be expired and refreshed
 //		clickAndWait("link=Refresh");
-		open(BASE_URL + "CacheControlMediumTestPage");
+		open(getBaseURL() + "CacheControlMediumTestPage");
 		String finalDate = getText("//dl[@id='mediumlive']/dt[2]");
 
 		Assert.assertTrue(initialDate.equals(interimDate),
@@ -72,21 +69,21 @@ public class CacheControlIntegrationTest extends AbstractIntegrationTestSuite {
 	@Test(groups = {"selenium"})
 	public void testLongCachedPage() throws Exception {
 		// Get the contents of the date time field
-		open(BASE_URL + "CacheControlLongTestPage");
+		open(getBaseURL() + "CacheControlLongTestPage");
 		String initialDate = getText("//dl[@id='longlive']/dt[2]");
 
 		// Wait 5 seconds
 		Thread.sleep(5000);
 
 		// Get the contents of the date time field - this should be cached
-		open(BASE_URL + "CacheControlLongTestPage");
+		open(getBaseURL() + "CacheControlLongTestPage");
 		String interimDate = getText("//dl[@id='longlive']/dt[2]");
 
 		// Wait 3 seconds - long cache is 7 seconds
 		Thread.sleep(3000);
 
 		// Get the contents of the date time field - this should be expired and refreshed
-		open(BASE_URL + "CacheControlLongTestPage");
+		open(getBaseURL() + "CacheControlLongTestPage");
 		String finalDate = getText("//dl[@id='longlive']/dt[2]");
 
 		Assert.assertTrue(initialDate.equals(interimDate),
@@ -99,21 +96,21 @@ public class CacheControlIntegrationTest extends AbstractIntegrationTestSuite {
 	@Test(groups = {"selenium"})
 	public void testFarFutureCachedPage() throws Exception {
 		// Get the contents of the date time field
-		open(BASE_URL + "CacheControlFarFutureTestPage");
+		open(getBaseURL() + "CacheControlFarFutureTestPage");
 		String initialDate = getText("//dl[@id='farfuturelive']/dt[2]");
 
 		// Wait 7 seconds
 		Thread.sleep(7000);
 
 		// Get the contents of the date time field - this should be cached
-		open(BASE_URL + "CacheControlFarFutureTestPage");
+		open(getBaseURL() + "CacheControlFarFutureTestPage");
 		String interimDate = getText("//dl[@id='farfuturelive']/dt[2]");
 
 		// Wait 3 seconds - far future cache is 9 seconds
 		Thread.sleep(3000);
 
 		// Get the contents of the date time field - this should be expired and refreshed
-		open(BASE_URL + "CacheControlFarFutureTestPage");
+		open(getBaseURL() + "CacheControlFarFutureTestPage");
 		String finalDate = getText("//dl[@id='farfuturelive']/dt[2]");
 
 		Assert.assertTrue(initialDate.equals(interimDate),
@@ -125,7 +122,7 @@ public class CacheControlIntegrationTest extends AbstractIntegrationTestSuite {
 
 	@Test(groups = {"selenium"})
 	public void testNoneCachedPage() throws Exception {
-		open(BASE_URL + "CacheControlNoneTestPage");
+		open(getBaseURL() + "CacheControlNoneTestPage");
 
 		// Get the contents of the date time field
 		String date = getText("//dl[@id='nonelive']/dt[2]");
@@ -134,7 +131,7 @@ public class CacheControlIntegrationTest extends AbstractIntegrationTestSuite {
 		Thread.sleep(2000);
 
 		// Refresh the page it shouldn't have changed
-		open(BASE_URL + "CacheControlNoneTestPage");
+		open(getBaseURL() + "CacheControlNoneTestPage");
 
 		String newDate = getText("//dl[@id='nonelive']/dt[2]");
 		assertTrue(!date.equals(newDate));
@@ -145,7 +142,7 @@ public class CacheControlIntegrationTest extends AbstractIntegrationTestSuite {
 
 	@Test(groups = {"selenium"})
 	public void testNeverCachedPage() throws Exception {
-		open(BASE_URL + "CacheControlNeverTestPage");
+		open(getBaseURL() + "CacheControlNeverTestPage");
 
 		// Get the contents of the date time field
 		String date = getText("//dl[@id='neverlive']/dt[2]");
@@ -154,7 +151,7 @@ public class CacheControlIntegrationTest extends AbstractIntegrationTestSuite {
 		Thread.sleep(2000);
 
 		// Refresh the page it shouldn't have changed
-		open(BASE_URL + "CacheControlNeverTestPage");
+		open(getBaseURL() + "CacheControlNeverTestPage");
 
 		String newDate = getText("//dl[@id='neverlive']/dt[2]");
 		assertTrue(!date.equals(newDate));
@@ -164,7 +161,7 @@ public class CacheControlIntegrationTest extends AbstractIntegrationTestSuite {
 
 	@Test(groups = {"selenium"})
 	public void testAjaxCachedPage() throws Exception {
-		open(BASE_URL + "CacheControlAjaxPage");
+		open(getBaseURL() + "CacheControlAjaxPage");
 
 		String pageDate = getText("//p[2]");
 
