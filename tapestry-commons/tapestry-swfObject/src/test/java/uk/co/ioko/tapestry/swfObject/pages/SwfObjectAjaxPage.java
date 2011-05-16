@@ -51,7 +51,7 @@ public class SwfObjectAjaxPage {
 
 	public void setupRender() {
 		flashvars = new JSONObject();
-		flashvars.append("ajaxRequestUrl", componentResources.createEventLink("ajaxRequest").toAbsoluteURI() );
+		flashvars.append("ajaxRequestUrl", componentResources.createEventLink("ajaxRequest").toURI() );
 
 	}
 
