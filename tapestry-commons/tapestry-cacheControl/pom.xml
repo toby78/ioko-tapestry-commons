@@ -95,7 +95,7 @@
                 <artifactId>maven-surefire-plugin</artifactId>
                 <configuration>
                     <suiteXmlFiles>
-                        <suiteXmlFile>src/test/resources/testng.xml</suiteXmlFile>
+                        <suiteXmlFile>src/test/resources/testng_selenium.xml</suiteXmlFile>
                     </suiteXmlFiles>
                 </configuration>
             </plugin>

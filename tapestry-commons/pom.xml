@@ -290,8 +290,7 @@ oummmmmUUWW9WflhljqXmbpqovjZljjlkpUUnm]]></license>
         <dependency>
             <groupId>org.testng</groupId>
             <artifactId>testng</artifactId>
-            <classifier>jdk15</classifier>
-            <version>5.8</version>
+            <version>6.0.1</version>
             <scope>test</scope>
         </dependency>
 
