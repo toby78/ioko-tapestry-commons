@@ -4,11 +4,11 @@
     <parent>
         <artifactId>ioko-tapestry-commons</artifactId>
         <groupId>uk.co.ioko</groupId>
-         <version>1.11.0-SNAPSHOT</version>
+        <version>1.11.0-SNAPSHOT</version>
     </parent>
     <groupId>uk.co.ioko</groupId>
     <artifactId>tapestry-swfObject</artifactId>
-     <version>1.11.0-SNAPSHOT</version>
+    <version>1.11.0-SNAPSHOT</version>
     <name>Tapestry Swf Object</name>
 
     <dependencies>
@@ -19,6 +19,16 @@
         <dependency>
             <groupId>org.apache.tapestry</groupId>
             <artifactId>tapestry-test</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>org.seleniumhq.selenium.client-drivers</groupId>
+            <artifactId>selenium-java-client-driver</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>org.seleniumhq.selenium</groupId>
+            <artifactId>selenium-server</artifactId>
         </dependency>
     </dependencies>
 
@@ -41,19 +51,29 @@
                     <webAppSourceDirectory>src/test/webapp</webAppSourceDirectory>
                 </configuration>
             </plugin>
-               <plugin>
-                   <groupId>org.apache.maven.plugins</groupId>
-                   <artifactId>maven-jar-plugin</artifactId>
-                   <configuration>
-                       <archive>
-                           <manifestEntries>
-                               <Tapestry-Module-Classes>uk.co.ioko.tapestry.swfObject.services.SwfModule</Tapestry-Module-Classes>
-                           </manifestEntries>
-                       </archive>
-                   </configuration>
-               </plugin>
-           </plugins>
-       </build>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-jar-plugin</artifactId>
+                <configuration>
+                    <archive>
+                        <manifestEntries>
+                            <Tapestry-Module-Classes>uk.co.ioko.tapestry.swfObject.services.SwfModule
+                            </Tapestry-Module-Classes>
+                        </manifestEntries>
+                    </archive>
+                </configuration>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-surefire-plugin</artifactId>
+                <configuration>
+                    <suiteXmlFiles>
+                        <suiteXmlFile>src/test/resources/testng.xml</suiteXmlFile>
+                    </suiteXmlFiles>
+                </configuration>
+            </plugin>
+        </plugins>
+    </build>
 
 
     <reporting>

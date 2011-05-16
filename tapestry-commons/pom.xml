@@ -153,12 +153,12 @@ oummmmmUUWW9WflhljqXmbpqovjZljjlkpUUnm]]></license>
             <dependency>
                 <groupId>uk.co.ioko</groupId>
                 <artifactId>tapestry-javascript</artifactId>
-                 <version>1.11.0-SNAPSHOT</version>
+                <version>1.11.0-SNAPSHOT</version>
             </dependency>
             <dependency>
                 <groupId>uk.co.ioko</groupId>
                 <artifactId>tapestry-mixins</artifactId>
-                 <version>1.11.0-SNAPSHOT</version>
+                <version>1.11.0-SNAPSHOT</version>
             </dependency>
             <dependency>
                 <groupId>uk.co.ioko</groupId>
@@ -217,6 +217,11 @@ oummmmmUUWW9WflhljqXmbpqovjZljjlkpUUnm]]></license>
                         <artifactId>commons-logging</artifactId>
                     </exclusion>
 
+                    <exclusion>
+                        <groupId>org.seleniumhq.selenium.server</groupId>
+                        <artifactId>selenium-server</artifactId>
+                    </exclusion>
+
                 </exclusions>
             </dependency>
 
@@ -236,18 +241,16 @@ oummmmmUUWW9WflhljqXmbpqovjZljjlkpUUnm]]></license>
             <dependency>
                 <groupId>org.seleniumhq.selenium.client-drivers</groupId>
                 <artifactId>selenium-java-client-driver</artifactId>
-                <version>1.0.1</version>
+                <version>1.0.2</version>
+                <scope>test</scope>
             </dependency>
             <dependency>
-                <groupId>org.seleniumhq.selenium.server</groupId>
+                <groupId>org.seleniumhq.selenium</groupId>
                 <artifactId>selenium-server</artifactId>
-                <version>1.0.1</version>
+                <version>2.0b3</version>
+                <scope>test</scope>
             </dependency>
-            <dependency>
-                <artifactId>selenium-server-coreless</artifactId>
-                <groupId>org.seleniumhq.selenium.server</groupId>
-                <version>1.0.1</version>
-            </dependency>
+
         </dependencies>
     </dependencyManagement>
     <distributionManagement>
@@ -272,12 +275,7 @@ oummmmmUUWW9WflhljqXmbpqovjZljjlkpUUnm]]></license>
             <id>tapestry</id>
             <url>http://tapestry.formos.com/maven-repository</url>
         </repository>
-        <!-- Pick up the selenium JARs. -->
-        <repository>
-            <id>OpenQA_Release</id>
-            <name>OpenQA Release Repository</name>
-            <url>http://nexus.openqa.org/content/repositories/releases</url>
-        </repository>
+
     </repositories>
 
     <pluginRepositories>
@@ -359,9 +357,9 @@ oummmmmUUWW9WflhljqXmbpqovjZljjlkpUUnm]]></license>
     <profiles>
         <profile>
             <!-- Used only when cuttting a full release.  Configures the deploy plugin to mark
-                              each artifact as a release (especially important for the archetype). Signs each
-                              file deployed (it actually signs way too many files and we have to clean up a bit
-                              once deployed). -->
+          each artifact as a release (especially important for the archetype). Signs each
+          file deployed (it actually signs way too many files and we have to clean up a bit
+          once deployed). -->
             <id>deploy</id>
             <distributionManagement>
                 <site>

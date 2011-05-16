@@ -36,10 +36,24 @@ public class SwfObjectIntegrationTest extends SeleniumTestCase {
         // We need to wait for flash to load and the page javascript to get the flash params from it
         waitForCondition("var contents = selenium.getText(\"//div[@id='flashvarResults']\"); contents != \"\";", "5000");
 
-        assertText("//div[@id='flashvarResults']/dl/dt[1]", "Cat");
-        assertText("//div[@id='flashvarResults']/dl/dd[1]", "Parsnip");
-        assertText("//div[@id='flashvarResults']/dl/dt[2]", "Vegetable");
-        assertText("//div[@id='flashvarResults']/dl/dd[2]", "Turnip");
+        String dt1 = getText("//div[@id='flashvarResults']/dl/dt[1]");
+        String dt2 = getText("//div[@id='flashvarResults']/dl/dt[2]");
+
+        if (dt1.equals("Cat")) {
+            assertText("//div[@id='flashvarResults']/dl/dd[1]", "Parsnip");
+        } else if (dt1.equals("Vegetable")) {
+            assertText("//div[@id='flashvarResults']/dl/dd[1]", "Turnip");
+        } else {
+            fail("dt1 is not Valid");
+        }
+
+        if (dt2.equals("Cat")) {
+            assertText("//div[@id='flashvarResults']/dl/dd[2]", "Parsnip");
+        } else if (dt2.equals("Vegetable")) {
+            assertText("//div[@id='flashvarResults']/dl/dd[2]", "Turnip");
+        } else {
+            fail("dt2 is not Valid");
+        }
 
 
     }
