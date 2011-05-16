@@ -17,38 +17,56 @@
  *     along with ioko tapestry-commons.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-Tapestry.ajaxRequest = function(url, successHandler)
-{
-    return new Ajax.Request(url, {
-        method: "get",
 
-        onSuccess: function(response, jsonResponse)
-        {
-            // When the page is unloaded, pending Ajax requests appear to terminate
-            // as succesful (but with no reply value). Since we're trying to navigate
-            // to a new page anyway, we just ignore those false success callbacks.
-            // We have a listener for the window's "beforeunload" event that sets
-            // this flag.
+Tapestry.ajaxRequest = function(url, options) {
 
-            if (Tapestry.windowUnloaded)
-                return;
+    if (Object.isFunction(options)) {
+        return Tapestry.ajaxRequest(url, { method : "get",
+            onSuccess : options
+        });
+    }
 
-            if (! response.request.success())
-            {
-                Tapestry.error(Tapestry.Messages.ajaxRequestUnsuccessful);
-                return;
-            }
+    var successHandler = options.onSuccess || Prototype.emptyFunction;
 
-            try
-            {
-                // Re-invoke the success handler, capturing any exceptions.
-                successHandler.call(this, response, jsonResponse);
-            }
-            catch (e)
-            {
-                Tapestry.error(Tapestry.Messages.clientException + e);
-            }
-        },
-        onException: Tapestry.ajaxFailureHandler,
-        onFailure: Tapestry.ajaxFailureHandler });
+    var finalOptions = $H({
+        onException : Tapestry.ajaxExceptionHandler,
+        onFailure : Tapestry.ajaxFailureHandler,
+        method: "get"
+    }).update(options).update({
+                                  onSuccess : function(response, jsonResponse) {
+                                      /*
+                                       * When the page is unloaded, pending Ajax requests appear to
+                                       * terminate as successful (but with no reply value). Since
+                                       * we're trying to navigate to a new page anyway, we just ignore
+                                       * those false success callbacks. We have a listener for the
+                                       * window's "beforeunload" event that sets this flag.
+                                       */
+                                      if (Tapestry.windowUnloaded)
+                                          return;
+
+                                      /*
+                                       * Prototype treats status == 0 as success, even though it seems
+                                       * to mean the server didn't respond.
+                                       */
+                                      if (!response.getStatus() || !response.request.success()) {
+                                          Tapestry.error(Tapestry.Messages.ajaxRequestUnsuccessful);
+                                          return;
+                                      }
+
+                                      try {
+                                          /* Re-invoke the success handler, capturing any exceptions. */
+                                          successHandler.call(this, response, jsonResponse);
+                                      } catch (e) {
+                                          finalOptions.onException.call(this, ajaxRequest, e);
+                                      }
+                                  }
+                              });
+
+
+    var ajaxRequest = new Ajax.Request(url, finalOptions.toObject());
+
+    return ajaxRequest;
 };
+
+
+
