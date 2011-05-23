@@ -1,7 +1,6 @@
 package uk.co.ioko.tapestry.properties;
 
 import org.apache.tapestry5.ioc.services.SymbolProvider;
-import org.springframework.util.Assert;
 
 import java.io.IOException;
 import java.io.InputStream;
@@ -35,8 +34,17 @@ public class PropertiesFileSymbolProvider implements SymbolProvider {
 	 *             if Properties.load throws one. Shouldn't happen since we check the resource's existenace first
 	 */
 	public PropertiesFileSymbolProvider(String[] propertiesFiles) throws IOException {
-		Assert.notEmpty(propertiesFiles, "Please provide at least one file name");
-		Assert.noNullElements(propertiesFiles, "Cannot load from null file name");
+
+        if (propertiesFiles == null || propertiesFiles.length == 0){
+            throw new IllegalArgumentException("Please provide at least one file name");
+        } else {
+            for (String file : propertiesFiles){
+                if (file == null){
+                    throw new IllegalArgumentException("Cannot load from null file name");
+                }
+            }
+        }
+
 		// enumerate over the array of file names and try to load each one.
 		for (String file : propertiesFiles) {
 			InputStream stream = PropertiesFileSymbolProvider.class.getResourceAsStream(file);
