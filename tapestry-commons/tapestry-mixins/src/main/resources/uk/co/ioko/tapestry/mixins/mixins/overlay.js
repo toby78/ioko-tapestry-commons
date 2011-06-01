@@ -1,7 +1,9 @@
-Tapestry.Initializer.overlayMixinLoad = function(isForm, overlayId, containerId, exposeColour) {
-    var overlay = jQuery(document.getElementById(overlayId));
-    var container = jQuery(document.getElementById(containerId));
-    var expose = (exposeColour != 'none');
+Tapestry.Initializer.overlayMixinLoad = function(spec) {
+
+
+    var overlay = jQuery(document.getElementById(spec.overlayId));
+    var container = jQuery(document.getElementById(spec.containerId));
+    var expose = (spec.exposeColour != 'none');
 
     jQuery(function() {
         overlay.overlay({
@@ -9,9 +11,9 @@ Tapestry.Initializer.overlayMixinLoad = function(isForm, overlayId, containerId,
                     fadeInSpeed: 'fast'
                 });
         if (expose) {
-            overlay.mask = { color: exposeColour };
+            overlay.mask = { color: spec.exposeColour };
         }
-        if (isForm == 'true') {
+        if (spec.isForm == 'true') {
             container.submit(function(event) {
                 overlay.overlay().load();
             });
