@@ -45,6 +45,14 @@
         	<groupId>uk.co.ioko</groupId>
         	<artifactId>tapestry-jquery</artifactId>
         </dependency>
+         <dependency>
+            <groupId>org.seleniumhq.selenium.client-drivers</groupId>
+            <artifactId>selenium-java-client-driver</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.seleniumhq.selenium</groupId>
+            <artifactId>selenium-server</artifactId>
+        </dependency>
     </dependencies>
 
     <build>
@@ -58,6 +66,15 @@
                             <Tapestry-Module-Classes>uk.co.ioko.tapestry.mixins.services.MixinsModule</Tapestry-Module-Classes>
                         </manifestEntries>
                     </archive>
+                </configuration>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-surefire-plugin</artifactId>
+                <configuration>
+                    <suiteXmlFiles>
+                        <suiteXmlFile>src/test/resources/testng_selenium.xml</suiteXmlFile>
+                    </suiteXmlFiles>
                 </configuration>
             </plugin>
             <plugin>

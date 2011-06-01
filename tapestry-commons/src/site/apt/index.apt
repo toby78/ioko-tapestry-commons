@@ -12,11 +12,13 @@ The Projects
 
  * {{{./tapestry-cacheControl/}Tapestry Cache Control}} - Provides a component that adds HTTP headers to control page caching based on global settings and page specific annotations
 
- * {{{./tapestry-javascript/}Tapestry Javascript Stacks}} - Provides a component that provides a contribution point for javascript to be added to every page and de-duplicated.
-
  * {{{./tapestry-mixins/}Tapestry Mixins }} - Provides a series of mixins that provide Overlays, Bound Checkboxes and Non-sorting grid
 
  * {{{./tapestry-jquery/}Tapestry Jquery }} - Provides JQuery to all pages
+
+Retired Projects
+
+ * Tapestry Javascript Stacks - Provides a component that provides a contribution point for javascript to be added to every page and de-duplicated.  Now similar functionality is in Tapestry-core
 
 
 Using the libraries

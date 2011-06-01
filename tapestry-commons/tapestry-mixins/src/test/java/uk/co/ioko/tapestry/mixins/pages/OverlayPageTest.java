@@ -1,15 +1,12 @@
 package uk.co.ioko.tapestry.mixins.pages;
 
-import org.apache.tapestry5.test.AbstractIntegrationTestSuite;
+import org.apache.tapestry5.test.SeleniumTestCase;
 import org.testng.annotations.Test;
 
 /**
  * Created by IntelliJ IDEA. User: ben Date: Jul 13, 2009 Time: 1:57:51 PM
  */
-public class OverlayPageTest extends AbstractIntegrationTestSuite {
-	public OverlayPageTest() {
-		super("src/test/webapp");
-	}
+public class OverlayPageTest extends SeleniumTestCase {
 
 	@Test(groups = "selenium")
 	public void testOverlay() throws InterruptedException {

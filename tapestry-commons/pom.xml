@@ -13,7 +13,6 @@
         <module>tapestry-caching</module>
         <module>tapestry-swfObject</module>
         <module>tapestry-cacheControl</module>
-        <module>tapestry-javascript</module>
         <module>tapestry-jquery</module>
         <module>tapestry-mixins</module>
         <module>sample-site</module>
@@ -163,7 +162,7 @@ oummmmmUUWW9WflhljqXmbpqovjZljjlkpUUnm]]></license>
             <dependency>
                 <groupId>uk.co.ioko</groupId>
                 <artifactId>tapestry-jquery</artifactId>
-                <version>1.11.0-jquery-1.3.2-SNAPSHOT</version>
+                <version>1.11.0-jquery-1.6.1-SNAPSHOT</version>
             </dependency>
             <dependency>
                 <groupId>org.apache.tapestry</groupId>

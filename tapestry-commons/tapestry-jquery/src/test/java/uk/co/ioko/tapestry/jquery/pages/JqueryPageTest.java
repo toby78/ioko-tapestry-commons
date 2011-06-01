@@ -26,13 +26,13 @@ public class JqueryPageTest {
 			// Interating over the tags
 			Element element = (Element) node;
 			if (element.getName().equals("script")) {
-				if (element.getAttribute("src").contains("jquery-1.3.2.js")) {
+				if (element.getAttribute("src").contains("jquery-1.6.1.js")) {
 					if (foundJquery) {
 						Assert.fail("found jquery twice");
 					} else {
 						foundJquery = true;
 					}
-				} else if (element.getAttribute("src").contains("jquery-1.3.2.min.js")) {
+				} else if (element.getAttribute("src").contains("jquery-1.6.1.min.js")) {
 					Assert.fail("found jquery min");
 
 				}
@@ -57,7 +57,7 @@ public class JqueryPageTest {
 			// Interating over the tags
 			Element element = (Element) node;
 			if (element.getName().equals("script")) {
-				 if (element.getAttribute("src").contains("jquery-1.3.2.js")) {
+				 if (element.getAttribute("src").contains("uk/co/ioko/tapestry/jquery/pages/jquery-1.6.1.js")) {
 					Assert.fail("found jquery normal");
 
 				}

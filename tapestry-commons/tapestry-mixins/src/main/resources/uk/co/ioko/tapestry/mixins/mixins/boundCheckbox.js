@@ -44,10 +44,10 @@ ioko.BoundCheckboxChild = Class.create({
     }
 });
 
-Tapestry.Initializer.boundCheckboxLoad = function(clientId, masterId) {
-	if ( masterId != "" ) {
-		new ioko.BoundCheckboxChild(clientId, masterId);
+Tapestry.Initializer.boundCheckboxLoad = function(spec) {
+	if ( spec.masterId != "" ) {
+		new ioko.BoundCheckboxChild(spec.clientId, spec.masterId);
 	} else {
-		new ioko.BoundCheckboxMaster(clientId);
+		new ioko.BoundCheckboxMaster(spec.clientId);
 	}
 };

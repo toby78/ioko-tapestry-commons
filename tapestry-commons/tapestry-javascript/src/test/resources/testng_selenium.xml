@@ -1,8 +1,0 @@
-<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd" >
-<suite name="All">
-	<test name="All Tests">
-		<packages>
-			<package name="uk.co.ioko.*"/>
-		</packages>
-	</test>
-</suite>

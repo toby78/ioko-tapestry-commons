@@ -8,20 +8,12 @@ import org.apache.tapestry5.ioc.OrderedConfiguration;
 import org.apache.tapestry5.ioc.annotations.SubModule;
 import org.apache.tapestry5.services.LibraryMapping;
 
-import uk.co.ioko.tapestry.javascript.services.JavascriptModule;
+import uk.co.ioko.tapestry.jquery.services.JqueryModule;
 
-@SubModule({JavascriptModule.class})
+@SubModule({JqueryModule.class})
 public class MixinsModule {
-	public static void contributeJavascriptStack(
-			@Path("classpath:/uk/co/ioko/tapestry/mixins/jquery.expose-1.0.1.min.js") Asset expose,
-			@Path("classpath:/uk/co/ioko/tapestry/mixins/jquery.overlay-1.0.1.min.js") Asset overlay,
-			OrderedConfiguration<Asset> stack) {
 
-		stack.add("jquery-expose", expose, "after:jquery");
-		stack.add("jquery-overlay", overlay, "after:jquery");
-	}
-
-	public static void contributeComponentClassResolver(
+   public static void contributeComponentClassResolver(
 			Configuration<LibraryMapping> configuration) {
 		configuration.add(new LibraryMapping("ioko",
 				"uk.co.ioko.tapestry.mixins"));

@@ -7,5 +7,6 @@ JQuery
 
 Usage
 
- Simply add a dependency on this to your project.
+ Simply add a dependency on this to your project and on pages you want to use Jquery add
+ @Import( stack = "Jquery")
 

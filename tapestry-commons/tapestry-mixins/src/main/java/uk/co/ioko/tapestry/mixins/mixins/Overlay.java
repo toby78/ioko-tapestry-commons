@@ -4,18 +4,11 @@ import org.apache.tapestry5.BindingConstants;
 import org.apache.tapestry5.ClientElement;
 import org.apache.tapestry5.MarkupWriter;
 import org.apache.tapestry5.RenderSupport;
-import org.apache.tapestry5.annotations.AfterRender;
-import org.apache.tapestry5.annotations.Environmental;
-import org.apache.tapestry5.annotations.IncludeJavaScriptLibrary;
-import org.apache.tapestry5.annotations.IncludeStylesheet;
-import org.apache.tapestry5.annotations.InjectContainer;
-import org.apache.tapestry5.annotations.Parameter;
-import org.apache.tapestry5.annotations.SetupRender;
+import org.apache.tapestry5.annotations.*;
 import org.apache.tapestry5.corelib.components.Form;
 import org.apache.tapestry5.services.ClientBehaviorSupport;
 
-@IncludeStylesheet("overlay.css")
-@IncludeJavaScriptLibrary( { "overlay.js" })
+@Import(stylesheet = "overlay.css", library = {"jquery.tools.min.js","overlay.js"}, stack = "Jquery")
 public class Overlay {
 	@InjectContainer
 	private ClientElement container;
