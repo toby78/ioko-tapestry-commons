@@ -22,5 +22,5 @@ package uk.co.ioko.tapestry.caching.pages;
 /**
  * Created by IntelliJ IDEA. User: ben Date: Jun 23, 2009 Time: 3:17:17 PM
  */
-public class RenderSupportPage {
+public class JavascriptSupportPage {
 }

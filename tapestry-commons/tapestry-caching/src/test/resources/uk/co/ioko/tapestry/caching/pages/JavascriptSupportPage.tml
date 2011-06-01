@@ -29,7 +29,7 @@
 <p>Render Support test page</p>
 
 <div id="cached" t:type="ioko/Cache" >
-<div t:type="ioko/RenderSupportUsingComponent"></div>
+<div t:type="ioko/JavascriptSupportUsingComponent"></div>
 </div>
 </body>
 </html>

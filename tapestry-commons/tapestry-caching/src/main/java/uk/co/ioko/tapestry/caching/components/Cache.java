@@ -22,7 +22,6 @@ package uk.co.ioko.tapestry.caching.components;
 import org.apache.tapestry5.BindingConstants;
 import org.apache.tapestry5.ComponentResources;
 import org.apache.tapestry5.MarkupWriter;
-import org.apache.tapestry5.RenderSupport;
 import org.apache.tapestry5.annotations.AfterRender;
 import org.apache.tapestry5.annotations.BeginRender;
 import org.apache.tapestry5.annotations.Environmental;
@@ -33,11 +32,12 @@ import org.apache.tapestry5.ioc.annotations.Inject;
 import org.apache.tapestry5.services.ClientBehaviorSupport;
 import org.apache.tapestry5.services.Environment;
 
+import org.apache.tapestry5.services.javascript.JavaScriptSupport;
 import uk.co.ioko.tapestry.caching.services.ClientBehaviorSupportPlayer;
 import uk.co.ioko.tapestry.caching.services.ClientBehaviorSupportRecorder;
 import uk.co.ioko.tapestry.caching.services.ContentCache;
-import uk.co.ioko.tapestry.caching.services.RenderSupportPlayer;
-import uk.co.ioko.tapestry.caching.services.RenderSupportRecorder;
+import uk.co.ioko.tapestry.caching.services.JavascriptSupportPlayer;
+import uk.co.ioko.tapestry.caching.services.JavascriptSupportRecorder;
 import uk.co.ioko.tapestry.caching.services.support.CacheRegion;
 import uk.co.ioko.tapestry.caching.services.support.CachedContent;
 
@@ -72,9 +72,8 @@ public class Cache {
 
 	// ==== STUFF REQUIRED FOR JS/CSS CACHING ====
 
-	@SuppressWarnings({"deprecation"})
     @Environmental
-	private RenderSupport renderSupport;
+	private JavaScriptSupport javascriptSupport;
 
 	@Environmental
 	private ClientBehaviorSupport clientBehaviorSupport;
@@ -103,7 +102,7 @@ public class Cache {
 		markupWriter.writeRaw(content.getContent());
 
 		// this will re-call all the RenderSupport methods we called previously
-		RenderSupportPlayer rsPlayer = new RenderSupportPlayer(renderSupport);
+		JavascriptSupportPlayer rsPlayer = new JavascriptSupportPlayer(javascriptSupport);
 		rsPlayer.playbackMethodCalls(content.getRenderSupportMethodCalls());
 
 		// this will re-call all the ClientBehaviorSupport methods we called previously
@@ -113,37 +112,34 @@ public class Cache {
 		return false;
 	}
 
-	@SuppressWarnings({"deprecation"})
-    @BeginRender
+	@BeginRender
 	void beginRender(MarkupWriter markupWriter) {
 		currentElement = markupWriter.element(element);
 		componentResources.renderInformalParameters(markupWriter);
 
 		// this replaces the instance of RenderSupport for this thread only
-		RenderSupportRecorder rsRecorder = new RenderSupportRecorder(renderSupport);
-		environment.push(RenderSupport.class, rsRecorder);
+		JavascriptSupportRecorder javascriptSupportRecorder = new JavascriptSupportRecorder(javascriptSupport);
+		environment.push(JavaScriptSupport.class, javascriptSupportRecorder);
 
 		// this replaces the instance of ClientBehaviorSupport for this thread only
 		ClientBehaviorSupportRecorder cbsRecorder = new ClientBehaviorSupportRecorder(clientBehaviorSupport);
 		environment.push(ClientBehaviorSupport.class, cbsRecorder);
 	}
 
-	@SuppressWarnings({"deprecation"})
-    @AfterRender
+	@AfterRender
 	void afterRender(MarkupWriter markupWriter) {
 		// end markup
 		markupWriter.end();
 
-		// System.out.println("after render: " + ++ar);
 		// set RenderSupport back to whatever it was before
-		RenderSupportRecorder rsRecorder = (RenderSupportRecorder) environment.pop(RenderSupport.class);
+		JavascriptSupportRecorder javascriptSupportRecorder = (JavascriptSupportRecorder) environment.pop(JavaScriptSupport.class);
 		ClientBehaviorSupportRecorder cbsRecorder = (ClientBehaviorSupportRecorder) environment
 				.pop(ClientBehaviorSupport.class);
 
 		// cache content
 		CachedContent content = new CachedContent();
 		content.setContent(currentElement.toString());
-		content.setRenderSupportMethodCalls(rsRecorder.getMethodCalls());
+		content.setRenderSupportMethodCalls(javascriptSupportRecorder.getMethodCalls());
 		content.setClientBehaviorSupportMethodCalls(cbsRecorder.getMethodCalls());
 		contentCache.addContent(key, content, cacheRegion);
 	}

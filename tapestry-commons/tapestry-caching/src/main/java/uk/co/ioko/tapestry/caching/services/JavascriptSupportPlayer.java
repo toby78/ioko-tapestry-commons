@@ -21,21 +21,18 @@ package uk.co.ioko.tapestry.caching.services;
 
 import java.util.List;
 
-import org.apache.tapestry5.RenderSupport;
-
+import org.apache.tapestry5.services.javascript.JavaScriptSupport;
 import uk.co.ioko.tapestry.caching.services.support.MethodCall;
 
-public class RenderSupportPlayer extends SupportPlayer {
+public class JavascriptSupportPlayer extends SupportPlayer {
 
-	@SuppressWarnings({"deprecation"})
-    private RenderSupport renderSupport;
+	private JavaScriptSupport javascriptSupport;
 
-	@SuppressWarnings({"deprecation"})
-    public RenderSupportPlayer(RenderSupport renderSupport) {
-		this.renderSupport = renderSupport;
+	public JavascriptSupportPlayer(JavaScriptSupport javascriptSupport) {
+		this.javascriptSupport = javascriptSupport;
 	}
 
 	public void playbackMethodCalls(List<MethodCall> methodCalls) {
-		super.playbackMethodCalls(renderSupport, methodCalls);
+		super.playbackMethodCalls(javascriptSupport, methodCalls);
 	}
 }

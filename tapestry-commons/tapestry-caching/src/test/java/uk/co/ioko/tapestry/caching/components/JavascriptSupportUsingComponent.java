@@ -28,6 +28,7 @@ import org.apache.tapestry5.annotations.IncludeStylesheet;
 import org.apache.tapestry5.ioc.annotations.Inject;
 import org.apache.tapestry5.json.JSONArray;
 import org.apache.tapestry5.json.JSONObject;
+import org.apache.tapestry5.services.javascript.JavaScriptSupport;
 
 import java.util.Date;
 
@@ -40,10 +41,10 @@ import java.util.Date;
 @SuppressWarnings({"ALL"})
 @IncludeJavaScriptLibrary("RenderSupport.js")
 @IncludeStylesheet("RenderSupport.css")
-public class RenderSupportUsingComponent {
+public class JavascriptSupportUsingComponent {
 
 	@Environmental
-	private RenderSupport renderSupport;
+	private JavaScriptSupport renderSupport;
 
 	@Inject
 	private ComponentResources componentResources;
@@ -53,17 +54,13 @@ public class RenderSupportUsingComponent {
 	}
 
 	public void setupRender(){
-		renderSupport.addClasspathScriptLink("/RenderSupportClassPath.js");
+		renderSupport.importJavaScriptLibrary("/js/RenderSupportClassPath.js");
 
 		JSONObject jsonObject = new JSONObject();
 		jsonObject.append("Bob", "the builder");
-		renderSupport.addInit("renderSupportInitJsonObject", jsonObject);
+		renderSupport.addInitializerCall("renderSupportInitJsonObject", jsonObject);
 
-		JSONArray jsonArray = new JSONArray();
-		jsonArray.put("parnsip");
-		jsonArray.put("buddy");
-		renderSupport.addInit("renderSupportInitJsonArray", jsonArray);
-		renderSupport.addInit("renderSupportInitParams", "sprout", "toby");
+		renderSupport.addInitializerCall("renderSupportInitParams", "parsnip");
 
 		renderSupport.addScript("var addedScript;");
 

@@ -28,13 +28,13 @@ import org.testng.annotations.Test;
 /**
  * Created by IntelliJ IDEA. User: ben Date: Jun 23, 2009 Time: 3:29:04 PM
  */
-public class RenderSupportPageTest {
+public class JavascriptSupportPageTest {
 
 	@Test
 	public void testRenderSupportSurvivesCaching() throws InterruptedException {
 
 		PageTester pageTester = new PageTester("uk.co.ioko.tapestry.caching", "Test", "src/test/webapp");
-		Document page1 = pageTester.renderPage("RenderSupportPage");
+		Document page1 = pageTester.renderPage("JavascriptSupportPage");
 
 		Element head = (Element) page1.getRootElement().getChildren().get(0);
 
@@ -43,15 +43,20 @@ public class RenderSupportPageTest {
 		Assert.assertTrue(headText.contains("components/RenderSupport.js"));
 		Assert.assertTrue(headText.contains(
 				"components/RenderSupport.css"));
-		Assert.assertTrue(headText.contains("RenderSupportClassPath.js"));
-		Assert.assertTrue(page1.toString().contains("renderSupportInitJsonObject\":[{\"Bob\":[\"the builder\"]}]"));
-		Assert.assertTrue(page1.toString().contains("\"renderSupportInitJsonArray\":[[\"parnsip\",\"buddy\"]]"));
-		Assert.assertTrue(page1.toString().contains("\"renderSupportInitParams\":[[\"sprout\",\"toby\"]]"));
+		Assert.assertTrue(headText.contains("js/RenderSupportClassPath.js"));
+		Assert.assertTrue(page1.toString().contains("\"Bob\" : [\n" +
+                "        \"the builder\"\n" +
+                "      ]"));
+		Assert.assertTrue(page1.toString().contains("\"renderSupportInitParams\" : [\n" +
+                "    \"parsnip\"\n" +
+                "  ]"));
 		Assert.assertTrue(page1.toString().contains("var addedScript;"));
 		Assert.assertTrue(page1.toString().contains("var addedScriptVariable;"));
-		Assert.assertTrue(page1.toString().contains("$('name').activate();"));
+		Assert.assertTrue(page1.toString().contains("\"activate\" : [\n" +
+                "    \"name\"\n" +
+                "  ]"));
 
-		Document page2 = pageTester.renderPage("RenderSupportPage");
+		Document page2 = pageTester.renderPage("JavascriptSupportPage");
 		Element head2 = (Element) page2.getRootElement().getChildren().get(0);
 
 		String headText2 = head.getChildMarkup();
@@ -59,12 +64,19 @@ public class RenderSupportPageTest {
 		Assert.assertTrue(headText2.contains(
 				"components/RenderSupport.css"));
 
-		Assert.assertTrue(headText2.contains("RenderSupportClassPath.js"));
-		Assert.assertTrue(page2.toString().contains("renderSupportInitJsonObject\":[{\"Bob\":[\"the builder\"]}]"));
-		Assert.assertTrue(page2.toString().contains("\"renderSupportInitJsonArray\":[[\"parnsip\",\"buddy\"]]"));
-		Assert.assertTrue(page2.toString().contains("\"renderSupportInitParams\":[[\"sprout\",\"toby\"]]"));
+		Assert.assertTrue(headText2.contains("js/RenderSupportClassPath.js"));
+		Assert.assertTrue(page2.toString().contains("renderSupportInitJsonObject\" : [\n" +
+                "    {\n" +
+                "      \"Bob\" : [\n" +
+                "        \"the builder\"\n" +
+                "      ]"));
+		Assert.assertTrue(page2.toString().contains("\"renderSupportInitParams\" : [\n" +
+                "    \"parsnip\"\n" +
+                "  ]"));
 		Assert.assertTrue(page2.toString().contains("var addedScript;"));
 		Assert.assertTrue(page2.toString().contains("var addedScriptVariable;"));
-		Assert.assertTrue(page2.toString().contains("$('name').activate();"));
+		Assert.assertTrue(page2.toString().contains("\"activate\" : [\n" +
+                "    \"name\"\n" +
+                "  ]"));
 	}
 }

@@ -51,7 +51,16 @@ public class CachingTestPageTest {
 		Element script = getScriptElement(document.getRootElement().getChildren());
 		Assert
 				.assertTrue(script.getChildMarkup()
-						.indexOf("Tapestry.init({\"zone\":[\"helloZone1\",\"helloZone2\"]})") > 0);
+						.indexOf("Tapestry.init({\n" +
+                                "  \"zone\" : [\n" +
+                                "    {\n" +
+                                "      \"element\" : \"helloZone1\"\n" +
+                                "    },\n" +
+                                "    {\n" +
+                                "      \"element\" : \"helloZone2\"\n" +
+                                "    }\n" +
+                                "  ]\n" +
+                                "});") > 0);
 
 		Assert.assertEquals(liveDate, cachedDate);
 		Assert.assertEquals(liveDate, cachedWithKeyDate);
@@ -89,7 +98,16 @@ public class CachingTestPageTest {
 		script = getScriptElement(document2.getRootElement().getChildren());
 		Assert
 				.assertTrue(script.getChildMarkup()
-						.indexOf("Tapestry.init({\"zone\":[\"helloZone1\",\"helloZone2\"]})") > 0);
+						.indexOf("Tapestry.init({\n" +
+                                "  \"zone\" : [\n" +
+                                "    {\n" +
+                                "      \"element\" : \"helloZone1\"\n" +
+                                "    },\n" +
+                                "    {\n" +
+                                "      \"element\" : \"helloZone2\"\n" +
+                                "    }\n" +
+                                "  ]\n" +
+                                "});") > 0);
 	}
 
 	@Test

@@ -19,9 +19,11 @@
 
 package uk.co.ioko.tapestry.caching.services;
 
+import org.apache.tapestry5.ioc.Configuration;
 import org.apache.tapestry5.ioc.MappedConfiguration;
 import org.apache.tapestry5.ioc.annotations.SubModule;
 import org.apache.tapestry5.SymbolConstants;
+import org.apache.tapestry5.services.LibraryMapping;
 
 /**
  * Created by IntelliJ IDEA. User: ben Date: Jun 16, 2009 Time: 9:05:00 AM
@@ -34,4 +36,8 @@ public class TestModule {
 		configuration.add(SymbolConstants.APPLICATION_VERSION, "1.0");
 		configuration.add(SymbolConstants.PRODUCTION_MODE, "false");
 	}
+
+    public static void contributeComponentClassResolver(Configuration<LibraryMapping> configuration){
+        configuration.add(new LibraryMapping("rendersupport", "js"));
+    }
 }
