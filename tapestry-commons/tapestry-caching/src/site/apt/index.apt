@@ -30,7 +30,7 @@ Usage
 
 Configuration
 
- You don't need to configure the cache, but if you want to you simply create a '{{{./ehcacheTapestryContext.xml}ehcacheTapestryContent.xml}} and set the cache regions to cache as you want. This is a standard {{{http://ehcache.sourceforge.net/}EHCache}} configuration file.
+ You don't need to configure the cache, but if you want to you simply create a '{{{https://github.com/ioko-tapestry-commons/ioko-tapestry-commons/blob/master/tapestry-commons/tapestry-caching/src/main/resources/ehcacheTapestryContent-fallback.xml}ehcacheTapestryContent.xml}} and set the cache regions to cache as you want. This is a standard {{{http://ehcache.sourceforge.net/}EHCache}} configuration file.
 
  The components requires cache's called
 

@@ -5,6 +5,14 @@
         <author email="ben@gidley.co.uk">Ben Gidley</author>
     </properties>
     <body>
+        <release version="1.11" date="2011-06-01" description="Version 1.11">
+            <action dev="Ben Gidley" type="fix">
+                Made compatible with Tapestry 5.2.x.
+                Key changes include removing ALL references to org.apache.tapestry5.RenderSupport and replacing with org.apache.tapestry5.services.javascript.JavaScriptSupport
+                You will have to make similar changes to your code if using Caching.
+            </>
+        </release>
+
         <release version="1.7" date="2010-01-14" description="Version 1.7">
             <action dev="Ben Gidley" type="add" issue="6">
                 Added service to allow you to pass in a response and recieved headers. This is useful for

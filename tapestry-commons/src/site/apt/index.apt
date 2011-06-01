@@ -58,7 +58,7 @@ Using the libraries
  </dependency>
 +--
 
- If you haven't already added it you need to add the tapestry.formos.com maven repository to your POM.
+ If you haven't already added it you need to add the tapestry.ioko.com maven repository to your POM.
 
 +--
  <repositories>
