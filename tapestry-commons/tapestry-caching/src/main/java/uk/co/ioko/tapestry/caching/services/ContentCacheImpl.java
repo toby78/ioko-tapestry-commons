@@ -71,7 +71,7 @@ public class ContentCacheImpl implements ContentCache {
 
 	private void registerMBeans(CacheManager cacheManager) {
 		MBeanServer mBeanServer = ManagementFactory.getPlatformMBeanServer();
-		ManagementService.registerMBeans(cacheManager, mBeanServer, true, true, true, true);
+		ManagementService.registerMBeans(cacheManager, mBeanServer, true, true, true, true, true);
 	}
 
 
@@ -110,6 +110,11 @@ public class ContentCacheImpl implements ContentCache {
 
 	private Ehcache getCache(CacheRegion cacheRegion) {
 		String cacheName = CACHE_NAME + CACHE_SEPARATOR + cacheRegion.getCacheNameSuffix();
+		
+		if (cacheManager.getEhcache(cacheName)==null){
+			cacheManager.addCache(cacheName);
+		}
+		
 		return cacheManager.getEhcache(cacheName);
 	}
 }
