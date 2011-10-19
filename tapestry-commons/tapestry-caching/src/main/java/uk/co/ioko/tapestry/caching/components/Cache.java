@@ -57,7 +57,7 @@ public class Cache {
 	 * By default, cached components are keyed on their full class name. If you wish to provide your own key you can do
 	 * so by providing a cacheKey. Note that this will override the cacheKeySuffix parameter.
 	 */
-	@Parameter(defaultPrefix = BindingConstants.LITERAL)
+	@Parameter
 	private String cacheKey;
 
 	/**
